@@ -6,3 +6,4 @@ sentence-transformers
 pillow
 jinja2
 torch
+gunicorn
