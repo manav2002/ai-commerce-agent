@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+transformers
+scikit-learn
+sentence-transformers
+pillow
+jinja2
+torch

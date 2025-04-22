@@ -1,0 +1,63 @@
+[
+    {
+      "name": "Budget ANC Wireless Headphones",
+      "description": "Affordable wireless headphones with active noise cancellation and 20-hour battery life.",
+      "price": "$39.99",
+      "image_path": "product_images/headset.png"
+    },
+    {
+      "name": "Bluetooth Earbuds",
+      "description": "Compact earbuds with deep bass and fast pairing for gym and commute.",
+      "price": "$24.99",
+      "image_path": "product_images/earbuds.jpg"
+    },
+    {
+      "name": "Gaming Headset",
+      "description": "Over-ear headset with noise-cancelling microphone and immersive surround sound for PC and consoles.",
+      "price": "$59.99",
+      "image_path": "product_images/headset.png"
+    },
+    {
+      "name": "Premium Studio Headphones",
+      "description": "Wired studio headphones with high-fidelity sound, ideal for music production and mixing.",
+      "price": "$99.00",
+      "image_path": "product_images/headset.png"
+    },
+    {
+      "name": "Portable Bluetooth Speaker",
+      "description": "Waterproof speaker with 12-hour battery, deep bass, and compact design.",
+      "price": "$34.99",
+      "image_path": "product_images/speaker.jpg"
+    },
+    {
+      "name": "Wireless Charging Pad",
+      "description": "Fast wireless charging pad compatible with iPhone, Samsung, and Pixel devices.",
+      "price": "$19.99",
+      "image_path": "product_images/charging_pad.jpg"
+    },
+    {
+      "name": "4-Port USB Wall Charger",
+      "description": "Compact wall charger with 4 USB-A ports for fast simultaneous device charging.",
+      "price": "$14.99",
+      "image_path": "product_images/wall_charger.jpg"
+    },
+    {
+      "name": "Laptop Cooling Stand",
+      "description": "Adjustable aluminum stand with dual fans and USB hub for laptop cooling and ergonomics.",
+      "price": "$29.99",
+      "image_path": "product_images/laptop_cooling_stand.jpg"
+    },
+    {
+      "name": "Smart LED Light Bulb",
+      "description": "Wi-Fi smart bulb with app and voice control, 16 million colors, and scheduling features.",
+      "price": "$12.99",
+      "image_path": "product_images/led_lightbulb.jpg"
+    },
+    {
+      "name": "1080p Webcam with Microphone",
+      "description": "Plug-and-play webcam with wide-angle lens, noise-reduction mic, and autofocus for video calls.",
+      "price": "$44.99",
+      "image_path": "product_images/webcam.jpg"
+    }
+  ]
+  

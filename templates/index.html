@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Commerce Agent</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; }
+    h2 { margin-top: 30px; }
+    form { margin-bottom: 20px; }
+    input, textarea, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 500px;
+    }
+    img { max-width: 150px; }
+  </style>
+</head>
+<body>
+  <h1>AI Commerce Agent</h1>
+
+  <h2>Ask a Question</h2>
+  <form id="qa-form">
+    <input type="text" name="question" placeholder="e.g. Do you offer free shipping?" required>
+    <button type="submit">Ask</button>
+    <pre id="qa-result"></pre>
+  </form>
+
+  <h2>Text-Based Product Recommendation</h2>
+  <form id="recommend-form">
+    <input type="text" name="query" placeholder="e.g. looking for wireless earbuds" required>
+    <button type="submit">Search</button>
+    <pre id="recommend-result"></pre>
+  </form>
+
+  <h2>Image-Based Product Search</h2>
+  <form id="image-form" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/*" required>
+    <button type="submit">Search by Image</button>
+    <pre id="image-result"></pre>
+  </form>
+
+  <script>
+    const qaForm = document.getElementById("qa-form");
+    const qaResult = document.getElementById("qa-result");
+
+    qaForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const question = qaForm.elements["question"].value;
+      const res = await fetch("/qa", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+      const data = await res.json();
+      qaResult.textContent = JSON.stringify(data, null, 2);
+    };
+
+    const recForm = document.getElementById("recommend-form");
+    const recResult = document.getElementById("recommend-result");
+
+    recForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const query = recForm.elements["query"].value;
+      const res = await fetch("/recommend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      recResult.textContent = JSON.stringify(data, null, 2);
+    };
+
+    const imgForm = document.getElementById("image-form");
+    const imgResult = document.getElementById("image-result");
+
+    imgForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const file = imgForm.elements["file"].files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/search-by-image", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      imgResult.textContent = JSON.stringify(data, null, 2);
+    };
+  </script>
+</body>
+</html>
