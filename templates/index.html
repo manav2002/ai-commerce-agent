@@ -40,13 +40,15 @@
   </form>
 
   <script>
+    const API_BASE = location.origin;  // Works on localhost *and* Render
+  
     const qaForm = document.getElementById("qa-form");
     const qaResult = document.getElementById("qa-result");
-
+  
     qaForm.onsubmit = async (e) => {
       e.preventDefault();
       const question = qaForm.elements["question"].value;
-      const res = await fetch("/qa", {
+      const res = await fetch(`${API_BASE}/qa`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question })
@@ -54,14 +56,14 @@
       const data = await res.json();
       qaResult.textContent = JSON.stringify(data, null, 2);
     };
-
+  
     const recForm = document.getElementById("recommend-form");
     const recResult = document.getElementById("recommend-result");
-
+  
     recForm.onsubmit = async (e) => {
       e.preventDefault();
       const query = recForm.elements["query"].value;
-      const res = await fetch("/recommend", {
+      const res = await fetch(`${API_BASE}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query })
@@ -69,23 +71,23 @@
       const data = await res.json();
       recResult.textContent = JSON.stringify(data, null, 2);
     };
-
+  
     const imgForm = document.getElementById("image-form");
     const imgResult = document.getElementById("image-result");
-
+  
     imgForm.onsubmit = async (e) => {
       e.preventDefault();
       const file = imgForm.elements["file"].files[0];
       const formData = new FormData();
       formData.append("file", file);
-
-      const res = await fetch("/search-by-image", {
+  
+      const res = await fetch(`${API_BASE}/search-by-image`, {
         method: "POST",
         body: formData
       });
       const data = await res.json();
       imgResult.textContent = JSON.stringify(data, null, 2);
     };
-  </script>
+  </script>  
 </body>
 </html>
