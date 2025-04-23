@@ -83,50 +83,50 @@ def recommend_products(request: RecRequest):
     ]
 
 
-## image search
+# ## image search
 
-clip_model = SentenceTransformer("clip-ViT-B-32")
+# clip_model = SentenceTransformer("clip-ViT-B-32")
 
-product_image_embeddings = []
-for item in product_catalog:
-    img_path = item.get("image_path")
-    if img_path:
-        try:
-            img = Image.open(img_path).convert("RGB")
-            emb = clip_model.encode(img, convert_to_tensor=True)
-            product_image_embeddings.append((item, emb))
-        except Exception as e:
-            print(f"Failed to load image {img_path}: {e}")
+# product_image_embeddings = []
+# for item in product_catalog:
+#     img_path = item.get("image_path")
+#     if img_path:
+#         try:
+#             img = Image.open(img_path).convert("RGB")
+#             emb = clip_model.encode(img, convert_to_tensor=True)
+#             product_image_embeddings.append((item, emb))
+#         except Exception as e:
+#             print(f"Failed to load image {img_path}: {e}")
 
-@app.post("/search-by-image")
-async def search_by_image(file: UploadFile = File(...)):
-    image = Image.open(io.BytesIO(await file.read())).convert("RGB")
-    image_embedding = clip_model.encode(image, convert_to_tensor=True)
+# @app.post("/search-by-image")
+# async def search_by_image(file: UploadFile = File(...)):
+#     image = Image.open(io.BytesIO(await file.read())).convert("RGB")
+#     image_embedding = clip_model.encode(image, convert_to_tensor=True)
 
-    ## matches >=0.8 only
-    results = []
-    for (item, emb) in product_image_embeddings:
-        sim = torch.nn.functional.cosine_similarity(image_embedding, emb, dim=0)
-        sim_score = sim.item()
-        if sim_score >= 0.8:
-            results.append((item, sim_score))
+#     ## matches >=0.8 only
+#     results = []
+#     for (item, emb) in product_image_embeddings:
+#         sim = torch.nn.functional.cosine_similarity(image_embedding, emb, dim=0)
+#         sim_score = sim.item()
+#         if sim_score >= 0.8:
+#             results.append((item, sim_score))
 
-    # show atleast one if nothing matches well (the best one)
-    if not results:
-        fallback_scores = [
-            (item, torch.nn.functional.cosine_similarity(image_embedding, emb, dim=0).item())
-            for (item, emb) in product_image_embeddings
-        ]
-        results = sorted(fallback_scores, key=lambda x: x[1], reverse=True)[:1]
+#     # show atleast one if nothing matches well (the best one)
+#     if not results:
+#         fallback_scores = [
+#             (item, torch.nn.functional.cosine_similarity(image_embedding, emb, dim=0).item())
+#             for (item, emb) in product_image_embeddings
+#         ]
+#         results = sorted(fallback_scores, key=lambda x: x[1], reverse=True)[:1]
 
-    return [
-        {
-            "name": item["name"],
-            "price": item["price"],
-            "score": round(float(score), 3)
-        }
-        for item, score in sorted(results, key=lambda x: x[1], reverse=True)
-    ]
+#     return [
+#         {
+#             "name": item["name"],
+#             "price": item["price"],
+#             "score": round(float(score), 3)
+#         }
+#         for item, score in sorted(results, key=lambda x: x[1], reverse=True)
+#     ]
 
 @app.get("/", response_class=HTMLResponse)
 def serve_home(request: Request):
