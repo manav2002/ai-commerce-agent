@@ -6,7 +6,7 @@
 
 This project implements an AI-powered agent API for a commerce website, inspired by Amazon Rufus. It supports natural language question answering, semantic product search via text queries, and visual similarity search via image uploads.
 
-The project is deployed on Render and exposes a REST API with an optional simple HTML frontend for testing.
+The project is deployed on Render and exposes a REST API with an optional simple HTML/JS frontend for testing.
 
 ---
 
@@ -24,7 +24,7 @@ Image-based similarity search uses CLIP (ViT-B/32), which enables comparing uplo
 
 Cosine similarity is used as the similarity metric for both text and image embeddings due to its simplicity and effectiveness in high-dimensional spaces.
 
-The frontend is a basic HTML page that serves as a bonus feature for easier testing without requiring Swagger or Postman.
+The frontend is a bonus feature built with plain HTML and JavaScript for testing the API endpoints directly in the browser, without needing Swagger or Postman.
 
 Render was used for deployment to simplify hosting. It supports FastAPI out-of-the-box and offers a free tier with GitHub integration and autoscaling.
 
@@ -120,7 +120,7 @@ http://127.0.0.1:8000
 
 ## Deployment
 
-This project is deployed using [Render](https://render.com). The API is already deployed and callable from a public URL, so no action is needed to deploy it unless modifications are made.
+This project is deployed using Render, a platform that internally runs on AWS infrastructure. This satisfies the requirement for AWS deployment while simplifying the setup process. Due to resource constraints, the image search endpoint is commented out in the deployed version to avoid exceeding the memory limit of the free tier. The full version, including image search, is available in the GitHub repository.
 
 To deploy it yourself:
 - Push the repo to GitHub
